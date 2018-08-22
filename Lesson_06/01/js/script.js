@@ -71,6 +71,20 @@ timeValue.addEventListener("change", () => {
 	} else {
 		isopenValue.style.backgroundColor = 'red';
 	};
+
+	if (time >= 19 && time < 20) {
+		mainList.discount = true;
+	} else {
+		mainList.discount = false;
+	};
+
+	if (mainList.discount == true) {
+		discountValue.style.backgroundColor = 'green';
+		price = price * 0.8;
+	} else {
+		discountValue.style.backgroundColor = 'red';
+		price = price / 0.8;
+	};	
 });
 
 budgetBtn.addEventListener("click", () => {
@@ -97,12 +111,7 @@ let mainList = {
 	employers: {},
 	open: false,
 	discount: true,
-	shopItems: [],
-	makeDiscount: function makeDiscount() {
-		if (mainList.discount == true) {
-			price = price * 0.8;
-		}
-	}
+	shopItems: []
 }
 
 console.log(mainList);
