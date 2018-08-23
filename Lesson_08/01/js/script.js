@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 
-	let deadLine = '2018-08-24';
+	let deadLine = '2018-08-25';
 
 	function getTimeRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -41,12 +41,21 @@ window.addEventListener('DOMContentLoaded', function() {
 				minutes = Math.floor( (t/1000/60) % 60 ),
 				hours = Math.floor( (t/(1000*60*60)) );
 
-		return {
-			'total': t,
-			'hours': hours,
-			'minutes': minutes,
-			'seconds': seconds
-		};
+		if (t > 0) {
+			return {
+				'total': t,
+				'hours': hours,
+				'minutes': minutes,
+				'seconds': seconds
+			}
+		} else {
+			return {
+				'total': 0,
+				'hours': '00',
+				'minutes': '00',
+				'seconds': '00'
+			}
+		};		
 	};
 
 	function setClock(id, endtime) {
@@ -74,4 +83,28 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	setClock('timer', deadLine);
 
+
+	let menu = document.querySelectorAll('a[href^="#"]'),
+			V = 0.5; // скорость прокрутки
+	for (let i = 0; i < menu.length; i++) {
+	    menu[i].addEventListener('click', function(event) {
+	        event.preventDefault();
+	        let w = window.pageYOffset,
+	            hash = this.href.replace(/[^#]*(.*)/, '$1');
+	        let t = document.querySelector(hash).getBoundingClientRect().top,
+	            start = null;
+	        requestAnimationFrame(step);
+	        function step(time) {
+	            if (start === null) start = time;
+	            let progress = time - start,
+	                r = (t < 0 ? Math.max(w - progress/V, w + t) : Math.min(w + progress/V, w + t));
+	            window.scrollTo(0,r);
+	            if (r != w + t) {
+	                requestAnimationFrame(step);
+	            } else {
+	                location.hash = hash;
+	            }
+	        }
+	    });
+	};
 });
