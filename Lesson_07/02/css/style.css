@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  font-family: sans-serif, serif;
+  background-color: #fff;
+}
+
+button:focus {
+  outline: none;
+}
+
+#field {
+	width: 500px;
+  height: 200px;
+  margin: 0 20px;
+  border: 3px black groove;
+  position: relative;
+}
+
+#ball {
+  position: absolute;
+  top: 160px;
+  left: 100px;
+  width: 40px;
+	height: 40px;
+  cursor: pointer;
+}
+
+.btn {
+  display: block;
+  width: 160px;
+  height: 40px;
+  margin: 20px;
+  padding: 5px;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #ffab05;
+  border: none;
+  cursor: pointer;
+}
